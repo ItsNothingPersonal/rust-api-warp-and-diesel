@@ -4,7 +4,7 @@ A small book catalog REST API written in rust with the help of warp, tokio and d
 
 ## Description
 
-My slightly modified/updated version from the one presented in this article by [Szymon Gibała](https://sgibala.com). I made some slight changes to the project layout out of personal preference and used the [diesel::r2d2::Builder](https://docs.diesel.rs/master/diesel/r2d2/struct.Builder.html) instead of the more generic (and 100% sufficient) connection style used in the tutorial.
+My slightly modified/updated version from the one presented in the [tutorial](https://sgibala.com/01-01-rust-api-with-warp-and-diesel/) by [Szymon Gibała](https://sgibala.com). I made some slight changes to the project layout out of personal preference and used the [diesel::r2d2::Builder](https://docs.diesel.rs/master/diesel/r2d2/struct.Builder.html) instead of the more generic (and 100% sufficient) connection style used in the tutorial.
 
 I also added cargo-husky to run some basic checks once you start committing stuff and itconfig for easier handling of configuration variables.
 
