@@ -27,8 +27,8 @@ itconfig::config! {
         ),
 
         pool {
-            MAX_OPEN: u64 => 32,
-            MAX_IDLE: u64 => 8,
+            MAX_SIZE: u32 => 32,
+            MIN_IDLE: u32 => 8,
             TIMEOUT_SECONDS: u64 => 15,
         },
     },
@@ -49,7 +49,12 @@ async fn main() {
     pretty_env_logger::init();
 
     // init db connection pool
-    let pg_pool = pg_pool(&config::database::URL());
+    let pg_pool = pg_pool(
+        &config::database::URL(),
+        config::database::pool::MAX_SIZE(),
+        config::database::pool::MIN_IDLE(),
+        config::database::pool::TIMEOUT_SECONDS(),
+    );
 
     // setup routes
     let routes = api_filters(pg_pool).recover(error::handle_rejection);
