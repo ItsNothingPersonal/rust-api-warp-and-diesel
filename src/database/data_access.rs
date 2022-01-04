@@ -65,4 +65,20 @@ impl DBAccessManager {
         }
         Ok(deleted)
     }
+
+    pub fn get_book_by_id(&self, book_id: i64) -> Result<BookDTO, AppError> {
+        use super::schema::books::dsl::*;
+
+        let book = books
+            .filter(id.eq(book_id))
+            .first::<BookDTO>(&self.connection)
+            .map_err(|err| {
+                AppError::from_diesel_err(
+                    err,
+                    format!("while looking for book with id {}", book_id).as_str(),
+                )
+            })?;
+
+        Ok(book)
+    }
 }

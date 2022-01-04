@@ -49,3 +49,14 @@ pub async fn list_books(db_manager: DBAccessManager) -> Result<impl warp::Reply,
 
     respond(result, warp::http::StatusCode::OK)
 }
+
+pub async fn get_book_by_id(
+    book_id: i64,
+    db_manager: DBAccessManager,
+) -> Result<impl warp::Reply, warp::Rejection> {
+    log::info!("handling looking up book with id {}", book_id);
+
+    let result = db_manager.get_book_by_id(book_id);
+
+    respond(result, warp::http::StatusCode::OK)
+}

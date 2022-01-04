@@ -3,7 +3,7 @@ mod handler;
 pub mod model;
 mod routes;
 
-use self::routes::{add_book, delete_book, list_books, update_status};
+use self::routes::{add_book, delete_book, get_book, list_books, update_status};
 use crate::{config, database::connection_pool::PgPool, error::error_variants::AppError};
 
 use serde::{de::DeserializeOwned, Serialize};
@@ -40,6 +40,7 @@ pub fn api_filters(
             add_book(pool.clone())
                 .or(update_status(pool.clone()))
                 .or(delete_book(pool.clone()))
+                .or(get_book(pool.clone()))
                 .or(list_books(pool)),
         )
 }

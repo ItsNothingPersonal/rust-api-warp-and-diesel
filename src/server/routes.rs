@@ -28,6 +28,16 @@ pub fn list_books(
         .and_then(handler::list_books)
 }
 
+/// GET /books/:id
+pub fn get_book(
+    pool: PgPool,
+) -> impl Filter<Extract = impl warp::Reply, Error = warp::Rejection> + Clone {
+    warp::path!("books" / i64)
+        .and(warp::get())
+        .and(with_db_access_manager(pool))
+        .and_then(handler::get_book_by_id)
+}
+
 /// PUT /books/:id
 pub fn update_status(
     pool: PgPool,
